@@ -21,7 +21,6 @@ public class FirstJob {
 			job.setNumReduceTasks(4);
 			job.setPartitionerClass(FirstPartition.class);
 			job.setMapperClass(FirstMapper.class);
-			job.setCombinerClass(FirstReducer.class);
 			job.setReducerClass(FirstReducer.class);
 			FileInputFormat.addInputPath(job, new Path("/blog/input"));
 			FileOutputFormat.setOutputPath(job, new Path("/blog/output1"));

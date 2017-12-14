@@ -14,6 +14,7 @@ public class SecondReducer extends Reducer<Text, IntWritable, Text, IntWritable>
 		{
 			sum += i.get();
 		}
+		System.out.println("sum: " + sum);
 		context.write(key, new IntWritable(sum));
 	}
 	

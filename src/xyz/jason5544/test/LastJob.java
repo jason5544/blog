@@ -29,6 +29,10 @@ public class LastJob {
 			
 			FileInputFormat.addInputPath(job, new Path("/blog/output1"));
 			FileOutputFormat.setOutputPath(job, new Path("/blog/output3"));
+			if (job.waitForCompletion(true))
+			{
+				System.out.println("job3 Ö´ÐÐ³É¹¦");
+			}
 		}
 		catch (Exception e)
 		{

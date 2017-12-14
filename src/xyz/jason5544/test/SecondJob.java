@@ -30,7 +30,7 @@ public class SecondJob {
 			boolean f = job.waitForCompletion(true);
 			if (f)
 			{
-				System.out.println("执行成功");
+				System.out.println("job2 执行成功");
 				LastJob.mainJob();
 			}
 			

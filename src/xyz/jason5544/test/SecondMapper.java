@@ -15,13 +15,16 @@ public class SecondMapper extends Mapper<LongWritable, Text, Text, IntWritable>{
 		
 		if (!fs.getPath().getName().contains("part-r-00003"))
 		{
-			String [] v = value.toString().trim().split("\t");
+			System.out.println("input: " + value.toString());
+			String [] v = value.toString().trim().split("\\s+");
 			if (v.length >= 2)
 			{
-				String [] ss = v[0].split("-");
+				System.out.println("v: " + v[0]);
+				String [] ss = v[0].split("_");
 				if (ss.length >= 2)
 				{
 					String w = ss[0];
+					System.out.println("word: "  + w);
 					context.write(new Text(w), new IntWritable(1));
 				}
 			}

@@ -14,11 +14,12 @@ public class FirstMapper extends Mapper<LongWritable, Text, Text, IntWritable>{
 	protected void map(LongWritable key, Text value, Context context) 
 			throws  IOException, InterruptedException
 	{
-		String[] v = value.toString().trim().split("\t");
+		String[] v = value.toString().trim().split("\\s+");
 		if (v.length >= 2)
 		{
 			String id = v[0].trim();
 			String content = v[1].trim();
+			System.out.println("------------------" + content);
 			StringReader sr = new StringReader(content);
 			IKSegmenter ikSegmenter = new IKSegmenter(sr, true);
 			Lexeme word = null;

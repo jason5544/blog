@@ -24,8 +24,12 @@ public class LastMapper extends Mapper<LongWritable, Text, Text, Text >
 	protected void setup(Context context) 
 			throws IOException, InterruptedException
 	{
+		System.out.println("----------------------------setup-----------------------");
+		
 		if (cmap == null || cmap.size() == 0 || df == null || df.size() == 0)
 		{
+
+//			System.out.println("----------------------------read url------------------------");
 			URI[] ss = context.getCacheFiles();
 			
 			if (ss != null)
@@ -33,14 +37,16 @@ public class LastMapper extends Mapper<LongWritable, Text, Text, Text >
 				for (int i = 0; i < ss.length; i++)
 				{
 					URI uri = ss[i];
+					System.out.println("path: "+ uri.getPath());
 					if (uri.getPath().endsWith("part-r-00003"))
 					{
 						Path path = new Path(uri.getPath());
-						BufferedReader br = new BufferedReader(new FileReader(uri.getPath()));
+						BufferedReader br = new BufferedReader(new FileReader(path.getName().toString()));
 						String line = br.readLine();
+						System.out.println("line:" + line);
 						if (line.startsWith("count"))
 						{
-							String[] ls = line.split("\t");
+							String[] ls = line.split("\\s+");
 							cmap = new HashMap<String, Integer>();
 							cmap.put(ls[0], Integer.parseInt(ls[1].trim()));
 						}
@@ -50,16 +56,22 @@ public class LastMapper extends Mapper<LongWritable, Text, Text, Text >
 					{
 						df = new HashMap<String, Integer>();
 						Path path = new Path(uri.getPath());
-						BufferedReader br = new BufferedReader(new FileReader(uri.getPath()));
+						BufferedReader br = new BufferedReader(new FileReader(path.getName().toString()));
 						String line;
 						while ((line = br.readLine()) != null)
 						{
-							String[] ls = line.split("\t");
+
+							System.out.println("line: " + line);
+							String[] ls = line.split("\\s+");
 							df.put(ls[0], Integer.parseInt(ls[1].trim()));
 						}
 						br.close();
 					}
 				}
+			}
+			else
+			{
+				System.out.println("ss is null");
 			}
 		}
 	}
@@ -70,11 +82,11 @@ public class LastMapper extends Mapper<LongWritable, Text, Text, Text >
 		
 		if (!fs.getPath().getName().contains("part-r-00003"))
 		{
-			String[] v = value.toString().trim().split("\t");
+			String[] v = value.toString().trim().split("\\s+");
 			if (v.length >= 2)
 			{
 				int tf = Integer.parseInt(v[1].trim());
-				String[] ss = v[0].split("-");
+				String[] ss = v[0].split("_");
 				if (ss.length >= 2)
 				{
 					String w = ss[0];

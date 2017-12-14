@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: ./lib/IKAnalyzer2012_u6.jar
+Main-Class: xyz.jason5544.test.FirstJob

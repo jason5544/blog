@@ -175,6 +175,6 @@
 	<classpathentry kind="lib" path="D:/hadoop-2.7.4/hadoop-2.7.4/share/hadoop/common/lib/activation-1.1.jar"/>
 	<classpathentry kind="lib" path="D:/hadoop-2.7.4/hadoop-2.7.4/share/hadoop/common/hadoop-nfs-2.7.4.jar"/>
 	<classpathentry kind="lib" path="D:/hadoop-2.7.4/hadoop-2.7.4/share/hadoop/common/hadoop-common-2.7.4.jar"/>
-	<classpathentry kind="lib" path="IKAnalyzer2012_u6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Triumph/eclipse-workspace/blog/lib/IKAnalyzer2012_u6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

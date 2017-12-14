@@ -1,7 +1,12 @@
 package xyz.jason5544.test;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.io.InputStream;
 
 import org.wltea.analyzer.core.IKSegmenter;
 import org.wltea.analyzer.core.Lexeme;
@@ -9,13 +14,26 @@ import org.wltea.analyzer.core.Lexeme;
 public class testIK {
 	public static void main(String[] args) throws IOException
 	{
-		StringReader sr = new StringReader("世界上最早的一份汽车保险出现在1898年的美国。美国的旅行者保险有限公司在1898年给纽约布法罗的杜鲁门马丁上了第一份汽车保险。马丁非常担心自己的爱车会被马冲撞。");
-		IKSegmenter ik = new IKSegmenter(sr, true);
-		Lexeme word = null;
-		while ((word = ik.next()) != null)
+		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("blog.txt"), "UTF-8"));
+		String value;
+		while ((value = br.readLine()) != null)
 		{
-			String w = word.getLexemeText();
-			System.out.println(w);
+			String[] v = value.toString().trim().split("\\s+");
+			if (v.length >= 2)
+			{
+				StringReader sr = new StringReader(v[1]);
+				IKSegmenter ik = new IKSegmenter(sr, true);
+				Lexeme word = null;
+				while ((word = ik.next()) != null)
+				{
+					String w = word.getLexemeText();
+					System.out.println(w);
+				}
+
+				
+			}
+
 		}
+		br.close();
 	}
 }
